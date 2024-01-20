@@ -23,11 +23,11 @@ const getAllJoyas = async (req, res) => {
 
 const getFilterJoyas = async (req, res) => {
   try {
-    const { price_min, price_max, category, metal } = req.query;
+    const { precio_min, precio_max, categoria, metal } = req.query;
     const inventario = await getFiltroInventario(
-      price_min,
-      price_max,
-      category,
+      precio_min,
+      precio_max,
+      categoria,
       metal
     );
     res.status(200).json(inventario);

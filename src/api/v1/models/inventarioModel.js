@@ -12,29 +12,24 @@ const getInventario = async (limits = 3, order_by = "id_ASC", page = 1) => {
   return rows;
 };
 
-const getFiltroInventario = async ({
-  price_min = 0,
-  price_max = 50000,
-  category = false,
-  metal = false,
-}) => {
+const getFiltroInventario = async (
+  precio_min = 0,
+  precio_max = 50000,
+  categoria = false,
+  metal = false
+) => {
   let SQLquery = "SELECT * FROM inventario";
   let filters = [];
   const values = [];
+
   const addFilter = (field, comparator, value) => {
-    switch (typeof value) {
-      case "number":
-        values.push(value);
-        break;
-      case "string":
-        values.push(`'${value}'`);
-    }
+    values.push(value);
     const { length } = filters;
     filters.push(`${field} ${comparator} $${length + 1}`);
   };
-  if (price_min) addFilter("precio", ">=", price_min);
-  if (price_max) addFilter("precio", "<=", price_max);
-  if (category) addFilter("categoria", "=", category);
+  if (precio_min) addFilter("precio", ">=", precio_min);
+  if (precio_max) addFilter("precio", "<=", precio_max);
+  if (categoria) addFilter("categoria", "=", categoria);
   if (metal) addFilter("metal", "=", metal);
 
   if (filters.length > 0) {
