@@ -1,8 +1,11 @@
-import express from "express";
-//Acá se importan las funciones del Controlador
-const router = express.Router();
+import { Router } from "express";
+import {
+  getAllJoyas,
+  getFilterJoyas,
+} from "../../src/api/v1/controllers/inventarioController.js";
+const router = Router();
 
-router.get("/joyas", getAllJoyas);
-router.get("/joyas/filtros", getFilterJoyas);
+router.get("/", getAllJoyas);
+router.get("/filtros", getFilterJoyas);
 
 export default router;
